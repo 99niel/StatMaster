@@ -1,0 +1,43 @@
+<html>
+
+<head>
+	<link rel="shortcut icon" type="image/png" href="/images/favicon.ico"/>
+	<title>StatMaster</title>
+	<script type="text/javascript" src="/script/Chart.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+</head>
+
+<body>
+<!--application logo-->
+
+<div>
+	<img src="/images/logo.png" alt="logo">
+</div>
+
+	<h2>Employee Statistics Graph</h2>
+	<br/><br/><br/>
+
+<!--chart placeholder-->
+
+<section class="container">
+<div class="one">
+<canvas id="firstChart" height="window.height" width="window.width"></canvas>
+</div>
+<div class="two">
+<canvas id="secondChart" height="window.height" width="window.width"></canvas>
+</div>
+</section>
+
+<!--Loading static data to the chart-->
+
+<script type="text/javascript" src="/script/getchart.js"></script>
+
+<!--MongoDB test-->
+
+<form action="/name" method="POST">
+	<input type="text" placeholder="name" name="name">
+	<button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
