@@ -14,11 +14,11 @@ const app = express();
 
 //logging function
 
-const logger = (req, res, next) => {
+/*const logger = (req, res, next) => {
 	console.log('Rendering graph...');
 	next();
 }
-app.use(logger);
+app.use(logger);*/
 
 //Middleware
 
@@ -43,25 +43,29 @@ app.post('/name', (req, res) => {
 	});
 });
 
+app.post('/', (req, res) => {
+	res.render('/public/result.html');
+});
+
 MongoClient.connect('mongodb://_karthik:l1o2a3d48991@ds247407.mlab.com:47407/statmaster_test_name', (err, database) => {
 	if (err) return console.log(err);
 	db = database;
 	app.listen(3000, () => {
-		console.log('running at 3000');
+		console.log('connected to mlab and running at 3000');
 	});
 });
 
 //Templating
 
-app.set('view engine', 'ejs');
+//app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
 	db.collection('name').find().toArray((err, results) => {
 		if (err) return console.log(err);
 
 		res.render('index.html', {name: result});
 	});
-});
+});*/
 
 //res.render(view, locals);
 

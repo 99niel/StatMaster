@@ -15,7 +15,7 @@ This application uses static data from an array to populate the datapoints. Thes
 a line graph and a bar graph. This application runs on your local server.
 
 REQUIREMENTS
-------------
+-------------
 
 This application is built using
 
