@@ -15,7 +15,7 @@ This application uses static data from an array to populate the datapoints. Thes
 a line graph and a bar graph. This application runs on your local server.
 
 REQUIREMENTS
--------------
+------------
 
 This application is built using
 
@@ -71,12 +71,15 @@ UPDATES FOR SECOND REVIEW WITH VAGISH
 	  -public
 	    -css
 	      -style.css
+		-data
+		  -points.json
 	    -images
 	      -favicon.ico
 	      -logo.png
    	    -script
   	      -Chart.js
-            -index.html
+		  -getchart.js
+        -index.html
 	  -views
 	  -app.js
 	  -package.json
