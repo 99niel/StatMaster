@@ -1,0 +1,15 @@
+
+
+
+1) md \data\db
+2)"C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath d:\test\mongodb\data
+3)"C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath "d:\test\mongo db data"
+
+start mongodb
+
+"C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe"
+
+reference link:
+
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+
