@@ -11,7 +11,7 @@
     "chartjs": "*",
     "ejs": "^2.5.7",
     "express": "*",
-    "mongodb": "^2.2.5",
+    "mongodb": "^2.2.34",
     "mongoose": "^4.13.9"
   },
   "dev_dependencies": {

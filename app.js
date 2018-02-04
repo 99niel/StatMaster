@@ -43,9 +43,18 @@ app.post('/name', (req, res) => {
 	});
 });
 
-app.post('/', (req, res) => {
-	res.render('/public/result.html');
-});
+//Connect to local mongodb
+
+/*const MongoClient = require('mongodb').MongoClient;
+const url = "mongodb://localhost:27017/points_table";
+
+MongoClient.connect(url, (err, db) => {
+	if(err) throw err;
+	console.log('Database created, Named points_table');
+	db.close();
+});*/
+
+//Connect to mongodb in mlab
 
 MongoClient.connect('mongodb://_karthik:l1o2a3d48991@ds247407.mlab.com:47407/statmaster_test_name', (err, database) => {
 	if (err) return console.log(err);
@@ -54,6 +63,8 @@ MongoClient.connect('mongodb://_karthik:l1o2a3d48991@ds247407.mlab.com:47407/sta
 		console.log('connected to mlab and running at 3000');
 	});
 });
+
+
 
 //Templating
 
