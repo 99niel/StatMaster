@@ -34,35 +34,46 @@ app.get('/', (req, res) => {
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.post('/name', (req, res) => {
+//Store method for mlab
+
+/*app.post('/name', (req, res) => {
 	db.collection('name').save(req.body, (err, result) => {
 		if (err) return console.log(err);
 
-		console.log(result + 'is saved to database');
+		console.log('data is saved to database');
 		 res.redirect('/');
 	});
-});
+});*/
 
 //Connect to local mongodb
 
-/*const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/points_table";
 
 MongoClient.connect(url, (err, db) => {
 	if(err) throw err;
-	console.log('Database created, Named points_table');
+
+	app.listen(3000, () => {
+		console.log('Database created, Named points_table');
+	});
 	db.close();
-});*/
+});
+
+app.post('/name', (err, db) => {
+	db.listCollections().toArray((err, collections) => {
+		assert.equal(err, null);
+		console.dir(collections);
+	});
+});
 
 //Connect to mongodb in mlab
 
-MongoClient.connect('mongodb://_karthik:l1o2a3d48991@ds247407.mlab.com:47407/statmaster_test_name', (err, database) => {
+/*MongoClient.connect('mongodb://_karthik:l1o2a3d48991@ds247407.mlab.com:47407/statmaster_test_name', (err, database) => {
 	if (err) return console.log(err);
 	db = database;
 	app.listen(3000, () => {
 		console.log('connected to mlab and running at 3000');
 	});
-});
+});*/
 
 
 
