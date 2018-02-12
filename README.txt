@@ -85,3 +85,10 @@ UPDATES FOR SECOND REVIEW WITH VAGISH
 	  -package.json
 	  -package.lock.json
 	  -README.txt
+
+	  ----11 Feb 2018----
+	  * mlab connection commented out
+	  * local mongodb implemented
+	  	- needs mongodb(community edition) installed in the local machine
+		- run mongodb as service before starting the app
+		
