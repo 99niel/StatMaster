@@ -1,95 +1,61 @@
 const express = require('express');
 
-const path = require('path');
+const mongodb = require('mongodb');
 
-const bodyParser = require('body-parser');
+const dbLoc = 'mongodb://localhost:27017/StatMaster';
 
-const MongoClient = require('mongodb').MongoClient;
+var dbObject;
 
-const port = process.env.PORT || 3000;
+const MongoClient = mongodb.MongoClient;
 
-global.__base = __dirname + '/';
-
-const app = express();
-
-//logging function
-
-/*const logger = (req, res, next) => {
-	console.log('Rendering graph...');
-	next();
-}
-app.use(logger);*/
-
-//Middleware
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname+'/public/index.html'));
-});
-
-//Mongo test
-//MongoShell-> mongo ds247407.mlab.com:47407/statmaster_test_name -u <dbuser> -p <dbpassword>
-//URI -> mongodb://<dbuser>:<dbpassword>@ds247407.mlab.com:47407/statmaster_test_name
-
-app.use(bodyParser.urlencoded({extended: true}));
-
-//Store method for mlab
-
-/*app.post('/name', (req, res) => {
-	db.collection('name').save(req.body, (err, result) => {
-		if (err) return console.log(err);
-
-		console.log('data is saved to database');
-		 res.redirect('/');
-	});
-});*/
-
-//Connect to local mongodb
-
-const url = "mongodb://localhost:27017/points_table";
-
-MongoClient.connect(url, (err, db) => {
+MongoClient.connect(dbLoc, (err, db) => {
 	if(err) throw err;
-
-	app.listen(3000, () => {
-		console.log('Database created, Named points_table');
-	});
-	db.close();
+	dbObject = db;
 });
 
-app.post('/name', (err, db) => {
-	db.listCollections().toArray((err, collections) => {
-		assert.equal(err, null);
-		console.dir(collections);
+function getData(responseObj) {
+	dbObject.collection('chartdata').find({}).toArray((err, docs) => {
+		
+		if(err) throw err;
+		var monthArray = [];
+		var ShortListedArray = [];
+		var SelectedArray = [];
+
+		for(index in docs){
+			var doc = docs[index];
+			var month = doc['month'];
+			var shortlisted = doc['shortlisted'];
+			var selected = doc['selected'];
+
+			monthArray.push({'label': month});
+			ShortListedArray.push({'value': shortlisted});
+			SelectedArray.push({'value': selected});
+		}
+
+		var response = {
+			'catagories': monthArray,
+			'empShortlisted': ShortListedArray,
+			'empSelected': SelectedArray
+		};
+		responseObj.json(response);
 	});
+};
+
+var app = express();
+
+var exphbs = require('express-handlebars');
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+app.use('/public', express.static('public'));
+app.get('/home', (req, res) => {
+	getData(res);
+});
+app.get('/', (req, res) => {
+	res.render('chart');
 });
 
-//Connect to mongodb in mlab
-
-/*MongoClient.connect('mongodb://_karthik:l1o2a3d48991@ds247407.mlab.com:47407/statmaster_test_name', (err, database) => {
-	if (err) return console.log(err);
-	db = database;
-	app.listen(3000, () => {
-		console.log('connected to mlab and running at 3000');
-	});
-});*/
-
-
-
-//Templating
-
-//app.set('view engine', 'ejs');
-
-/*app.get('/', (req, res) => {
-	db.collection('name').find().toArray((err, results) => {
-		if (err) return console.log(err);
-
-		res.render('index.html', {name: result});
-	});
-});*/
-
-//res.render(view, locals);
-
-/*app.listen(port);
-console.log('Server running at 3000...')*/
+app.listen(3000, () => {
+	console.log(`Server started on http://localhost/3000`);
+});

@@ -66,29 +66,25 @@ UPDATES FOR SECOND REVIEW WITH VAGISH
  * CDN references are removed and all files are now referenced from the local storage. 
  * use flag "-g" with package install to install the package globally.
  * code now uses ES6 features
- * Application structure:
-	-Master_Test
-	  -public
-	    -css
-	      -style.css
-		-data
-		  -points.json
-	    -images
-	      -favicon.ico
-	      -logo.png
-   	    -script
-  	      -Chart.js
-		  -getchart.js
-        -index.html
-	  -views
-	  -app.js
-	  -package.json
-	  -package.lock.json
-	  -README.txt
 
-	  ----11 Feb 2018----
-	  * mlab connection commented out
-	  * local mongodb implemented
-	  	- needs mongodb(community edition) installed in the local machine
-		- run mongodb as service before starting the app
-		
+21 Feb 2018
+ -------------------------------------
+ * Working on handlebars view engine
+ * Data is loaded to the local mongo database "StatMaster", collection name "chartdata". File name "data.json"
+ * Command to load data to local db: "mongoimport --db <dbName> --collection <collectionName> --type json --file <fileName> --jsonArray"
+ * ISSUE: Chart is not displayed, issue with the handlebars integration or naming.
+ * Application structure:
+	-STATMASTER
+		-public
+	    	-script
+  	      		-Chart.js
+				-getchart.js
+		-views
+			-layouts
+				-main.handlebars
+			-chart.handlebars
+		-data.json
+		-app.js
+	  	-package.json
+	  	-package.lock.json
+	  	-README.txt

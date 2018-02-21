@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "statmaster",
   "version": "1.0.0",
   "description": "test one for node",
   "main": "app.js",
@@ -7,17 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "body-parser": "*",
-    "chartjs": "*",
-    "ejs": "^2.5.7",
-    "express": "*",
-    "mongodb": "^2.2.34",
-    "mongoose": "^4.13.9"
+    "express": "^4.13.3",
+    "express-handlebars": "^2.0.1",
+    "mongodb": "^2.0.42"
   },
-  "dev_dependencies": {
-    "nodemon": "^1.14.7",
-    "serve-favicon": "*"
-  },
+  "dev_dependencies": {},
   "author": "karthik",
   "license": "ISC"
 }
