@@ -1,14 +1,16 @@
 var ChartData;
 
-() => {
+$(() => {
     $.ajax({
 
         url: 'http://localhost/home',
         type: 'GET',
         success : (data) => {
             ChartData = data;
-            var template = Handlebars.compile($('#chart-location').html());
- 
+            var template = Handlebars.compile($('#tabular-template').html());
+            $("#table-location").html(template(data));
+            
+            var Chart1 = document.getElementById("chart-location").getContext('2d');
             const firstChart = new Chart(Chart1, {
                 type: 'line',
                 data: {
@@ -36,4 +38,4 @@ var ChartData;
 
         }
     });
-};
+});
