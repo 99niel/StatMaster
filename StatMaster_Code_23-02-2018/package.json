@@ -1,0 +1,17 @@
+{
+  "name": "statmaster",
+  "version": "1.0.0",
+  "description": "test one for node",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "express-handlebars": "^2.0.1",
+    "mongodb": "^2.0.42"
+  },
+  "dev_dependencies": {},
+  "author": "karthik",
+  "license": "ISC"
+}
