@@ -1,33 +1,20 @@
-var ChartData;
+//var ChartData;
 
 $(() => {
     $.ajax({
 
-        url: 'http://localhost/home',
+        url: 'http://localhost:3000/home',
         type: 'GET',
         success : (data) => {
-            ChartData = data;
+            //ChartData = data;
             var template = Handlebars.compile($('#tabular-template').html());
             $("#table-location").html(template(data));
             
-            var Chart1 = document.getElementById("chart-location").getContext('2d');
+            var Chart1 = document.getElementById('chart-location').getContext('2d');
             const firstChart = new Chart(Chart1, {
                 type: 'line',
-                data: {
-                    labels: data["categories"],
-                    datasets: [{
-                        label: '# Hired',
-                        data: data["empShortlisted"],
-                        backgroundColor: 'rgba(91, 185, 211,0.4)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: '# Short listed',
-                        data: data["empSelected"],
-                        backgroundColor: 'rgba(0, 0, 0,0.4)',
-                        borderWidth: 1
-                    }]
-                },
+                labels: data['categories'],
+                data: data['dataset'],
                 options: {
                     title: {
                         display: true,
@@ -35,7 +22,6 @@ $(() => {
                     }
                 }
             });
-
         }
     });
 });

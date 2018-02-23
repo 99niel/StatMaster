@@ -16,15 +16,12 @@
     </tr>
   </thead>
   <tbody>
+    \{{#each dataset}}
     <tr>
-      <td>Shortlisted</td>
-      \{{#each empShortlisted}} <td>\{{value}}</td> \{{/each }}
+      <td>\{{label}}</td>
+      \{{#each data}} <td>\{{value}}</td> \{{/each}}
     </tr>
-
-    <tr>
-      <td>Selected</td>
-      \{{#each empSelected}} <td>\{{value}}</td> \{{/each }}
-    </tr>
+    \{{/each}}
   </tbody>
 </table>
 </script>

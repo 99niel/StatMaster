@@ -1,32 +1,32 @@
 [
   {
-    "month": "Jan", "ShortListed" : 23, "Selcted": 20
+    "month": "Jan", "shortlisted" : 23, "selected": 20
   },
   {
-    "month": "Feb", "ShortListed" : 10, "Selcted": 5
+    "month": "Feb", "shortlisted" : 10, "selected": 5
   },
   {
-    "month": "Mar", "ShortListed" : 4, "Selcted": 4
+    "month": "Mar", "shortlisted" : 4, "selected": 4
   },
   {
-    "month": "Apr", "ShortListed" : 30, "Selcted": 14
+    "month": "Apr", "shortlisted" : 30, "selected": 14
   },
   {
-    "month": "May", "ShortListed" : 5, "Selcted": 5
+    "month": "May", "shortlisted" : 5, "selected": 5
   },
   {
-    "month": "Jun", "ShortListed" : 12, "Selcted": 2
+    "month": "Jun", "shortlisted" : 12, "selected": 2
   },
   {
-    "month": "Jul", "ShortListed" : 6, "Selcted": 3
+    "month": "Jul", "shortlisted" : 6, "selected": 3
   },
   {
-    "month": "Aug", "ShortListed" : 22, "Selcted": 18
+    "month": "Aug", "shortlisted" : 22, "selected": 18
   },
   {
-    "month": "Sept", "ShortListed" : 15, "Selcted": 10
+    "month": "sept", "shortlisted" : 15, "selected": 10
   },
   {
-    "month": "Oct", "ShortListed" : 10, "Selcted": 10
+    "month": "Oct", "shortlisted" : 10, "selected": 10
   }
 ]
