@@ -28,5 +28,11 @@
   },
   {
     "month": "Oct", "shortlisted" : 10, "selected": 10
+  },
+  {
+    "month": "Nov", "shortlisted" : 16, "selected": 4
+  },
+  {
+    "month": "Dec", "shortlisted" : 25, "selected": 15
   }
 ]
