@@ -17,7 +17,7 @@ MongoClient.connect(dbLoc, (err, db) => {
 	
 });
 
-function getData(responseObj) {
+var getData = responseObj => {
 	dbObject.collection('chartdata').find({}).toArray((err, docs) => {
 		
 		if(err) throw err;
