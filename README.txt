@@ -88,3 +88,13 @@ UPDATES FOR SECOND REVIEW WITH VAGISH
 	  	-package.json
 	  	-package.lock.json
 	  	-README.txt
+
+27 Feb 2018
+ -------------------------------------
+ COMPLETED TAKSs:
+ * Implemented handlebars.
+ * ES6 features.
+ * Graph is rendered using handlebars.
+TO-DO TASKs:
+ * Get chart data from ajax response.
+ * Map the response to chartjs chart properties.
