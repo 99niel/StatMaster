@@ -1,69 +1,77 @@
 const express = require('express');
 
+const mongodb = require('mongodb');
+
+//const dbLoc = 'mongodb://localhost:27017/StatMaster';
+const dbLoc = 'mongodb://_karthik:l1o2a3d48991@ds247407.mlab.com:47407/statmaster_test_name'
+
 const path = require('path');
 
-const bodyParser = require('body-parser');
+var dbObject;
 
-const MongoClient = require('mongodb').MongoClient;
+const MongoClient = mongodb.MongoClient;
 
-const port = process.env.PORT || 3000;
+MongoClient.connect(dbLoc, (err, db) => {
+	if(err) throw err;
+	dbObject = db;
+	
+});
 
-global.__base = __dirname + '/';
+var getData = responseObj => {
+	dbObject.collection('chartdata').find({}).toArray((err, docs) => {
+		
+		if(err) throw err;
+		var monthArray = [];
+		var shortListedArray = [];
+		var selectedArray = [];
 
-const app = express();
+		for(index in docs){
+			var doc = docs[index];
+			var month = doc['month'];
+			var shortlisted = doc['shortlisted'];
+			var selected = doc['selected'];
 
-//logging function
+			monthArray.push({'label': month});
+			shortListedArray.push({'value': shortlisted});
+			selectedArray.push({'value': selected});
+		}
+		
+		var dataset = [
+			{
+			  "label" : "# Short listed",
+			  "data" : shortListedArray
+			},
+			{
+			  "label" : "# Hired",
+			  "data": selectedArray
+			}
+		  ];
 
-const logger = (req, res, next) => {
-	console.log('Rendering graph...');
-	next();
-}
-app.use(logger);
+		var response = {
+			'categories': monthArray,
+			'dataset': dataset
+		};
+		responseObj.json(response);
+	});
+	
+};
 
-//Middleware
+var app = express();
 
-app.use(express.static(path.join(__dirname, 'public')));
+var exphbs = require('express-handlebars');
 
+app.engine('handlebars', exphbs({defaultLayout: 'main', layourDir: __dirname + '/views/'}));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'handlebars');
+
+app.use('/public', express.static('public'));
+app.get('/home', (req, res) => {
+	getData(res);
+});
 app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname+'/public/index.html'));
+	res.render('chart');
 });
 
-//Mongo test
-//MongoShell-> mongo ds247407.mlab.com:47407/statmaster_test_name -u <dbuser> -p <dbpassword>
-//URI -> mongodb://<dbuser>:<dbpassword>@ds247407.mlab.com:47407/statmaster_test_name
-
-app.use(bodyParser.urlencoded({extended: true}));
-
-app.post('/name', (req, res) => {
-	db.collection('name').save(req.body, (err, result) => {
-		if (err) return console.log(err);
-
-		console.log(result + 'is saved to database');
-		 res.redirect('/');
-	});
+app.listen(3000, () => {
+	console.log(`Server started on http://localhost:3000`);
 });
-
-MongoClient.connect('mongodb://_karthik:l1o2a3d48991@ds247407.mlab.com:47407/statmaster_test_name', (err, database) => {
-	if (err) return console.log(err);
-	db = database;
-	app.listen(3000, () => {
-		console.log('running at 3000');
-	});
-});
-
-//Templating
-
-app.set('view engine', 'ejs');
-
-app.get('/', (req, res) => {
-	db.collection('name').find().toArray((err, results) => {
-		if (err) return console.log(err);
-
-		res.render('index.html', {name: result});
-	});
-});
-
-//res.render(view, locals);
-
-/*app.listen(port);
-console.log('Server running at 3000...')*/
