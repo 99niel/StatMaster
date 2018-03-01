@@ -1,14 +1,23 @@
 //var ChartData;
 
+
+
+
 var chartDemo = () => {
 
     $.ajax({
 
         url: 'http://localhost:3000/home',
         type: 'GET',
+        
         success: (data) => {
             //ChartData = data;
-            //console.log(data);
+            console.log(data);
+            var chartDataMonth = data.categories;
+            console.log(chartDataMonth);
+            console.log(data['empShort']);
+            console.log(data['empSelect']);
+
             var template = Handlebars.compile($('#tabular-template').html());
             $("#table-location").html(template(data));
 
@@ -18,8 +27,16 @@ var chartDemo = () => {
                 data: {
                     labels: data['categories'],
                     datasets: [{
-                        label: 'Testing',
+                        label: 'Testing - 1(Short listed)',
                         data: [12, 19, 3, 5, 2, 3, 4, 7, 17, 23],
+                        borderColor: [
+                            'rgba(0,0,255,1)',
+                        ],
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Testing - 2(Hired)',
+                        data: [10, 16, 3, 4, 2, 1, 3, 5, 16, 22],
                         borderColor: [
                             'rgba(255,99,132,1)',
                         ],

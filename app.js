@@ -7,7 +7,7 @@ const dbLoc = 'mongodb://_karthik:l1o2a3d48991@ds247407.mlab.com:47407/statmaste
 
 const path = require('path');
 
-var dbObject;
+let dbObject;
 
 const MongoClient = mongodb.MongoClient;
 
@@ -17,26 +17,26 @@ MongoClient.connect(dbLoc, (err, db) => {
 	
 });
 
-var getData = responseObj => {
+const getData = responseObj => {
 	dbObject.collection('chartdata').find({}).toArray((err, docs) => {
 		
 		if(err) throw err;
-		var monthArray = [];
-		var shortListedArray = [];
-		var selectedArray = [];
+		const monthArray = [];
+		const shortListedArray = [];
+		const selectedArray = [];
 
 		for(index in docs){
-			var doc = docs[index];
-			var month = doc['month'];
-			var shortlisted = doc['shortlisted'];
-			var selected = doc['selected'];
+			const doc = docs[index];
+			const month = doc['month'];
+			const shortlisted = doc['shortlisted'];
+			const selected = doc['selected'];
 
 			monthArray.push({'label': month});
 			shortListedArray.push({'value': shortlisted});
 			selectedArray.push({'value': selected});
 		}
 		
-		var dataset = [
+		/*const dataset = [
 			{
 			  "label" : "# Short listed",
 			  "data" : shortListedArray
@@ -45,20 +45,21 @@ var getData = responseObj => {
 			  "label" : "# Hired",
 			  "data": selectedArray
 			}
-		  ];
+		  ];*/
 
-		var response = {
+		const response = {
 			'categories': monthArray,
-			'dataset': dataset
+			'empShort': shortListedArray,
+			'empSelect': selectedArray
 		};
 		responseObj.json(response);
 	});
 	
 };
 
-var app = express();
+const app = express();
 
-var exphbs = require('express-handlebars');
+const exphbs = require('express-handlebars');
 
 app.engine('handlebars', exphbs({defaultLayout: 'main', layourDir: __dirname + '/views/'}));
 app.set('views', path.join(__dirname, 'views'));

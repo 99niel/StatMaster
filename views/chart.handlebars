@@ -1,9 +1,10 @@
+
+
+<canvas id="chart-location" width="80px" height="30px"></canvas>
+<br/>
 <div id="table-location">
 
 </div>
-<br/>
-
-<canvas id="chart-location" width="80px" height="30px"></canvas>
 
 <script id="tabular-template" type="text/html">
 <h2>Tabular Data</h2>
@@ -15,12 +16,14 @@
     </tr>
   </thead>
   <tbody>
-    \{{#each dataset}}
     <tr>
-      <td>\{{label}}</td>
-      \{{#each data}} <td>\{{value}}</td> \{{/each}}
+      <td>Shortlisted</td>
+      \{{#each empShort}} <td>\{{value}}</td> \{{/each }}
     </tr>
-    \{{/each}}
+    <tr>
+      <td>Hired</td>
+      \{{#each empSelect}} <td>\{{value}}</td> \{{/each }}
+    </tr>
   </tbody>
 </table>
 
