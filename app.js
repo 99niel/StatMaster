@@ -2,6 +2,8 @@ const express = require('express');
 
 const mongodb = require('mongodb');
 
+let Ajax = require('simple-ajax');
+
 //const dbLoc = 'mongodb://localhost:27017/StatMaster';
 const dbLoc = 'mongodb://_karthik:l1o2a3d48991@ds247407.mlab.com:47407/statmaster_test_name'
 

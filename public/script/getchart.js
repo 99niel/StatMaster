@@ -1,108 +1,120 @@
-//var ChartData;
-
-
-
-
-var chartDemo = () => {
-
-    $.ajax({
-
-        url: 'http://localhost:3000/home',
-        type: 'GET',
-        
-        success: (data) => {
-            //ChartData = data;
-            console.log(data);
-            var chartDataMonth = data.categories;
-            console.log(chartDataMonth);
-            console.log(data['empShort']);
-            console.log(data['empSelect']);
-
-            var template = Handlebars.compile($('#tabular-template').html());
-            $("#table-location").html(template(data));
-
-            var ctx = document.getElementById("chart-location").getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: data['categories'],
-                    datasets: [{
-                        label: 'Testing - 1(Short listed)',
-                        data: [12, 19, 3, 5, 2, 3, 4, 7, 17, 23],
-                        borderColor: [
-                            'rgba(0,0,255,1)',
-                        ],
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Testing - 2(Hired)',
-                        data: [10, 16, 3, 4, 2, 1, 3, 5, 16, 22],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-
+var onElementReady = ($canvasElement) => {
+    return new Promise((resolve) => {
+      var waitForElement = () => {
+        if ($canvasElement) {
+          resolve($canvasElement);
+        } else {
+          window.requestAnimationFrame(waitForElement);
         }
+      };
+      waitForElement();
+    })
+  };
+  
+  var $someElement = document.querySelector('#chart-location');
+  onElementReady($someElement)
+    .then(() => {
+      
+        $.ajax({
+
+            url: 'http://localhost:3000/home',
+            type: 'GET',
+            
+            success: (data) => {
+                //ChartData = data;
+                //console.log(data);
+               
+                var template = Handlebars.compile($('#tabular-template').html());
+                $("#table-location").html(template(data));
+    
+                var months = Object.values(data['categories']).map((data) => data.label);
+                var ShortL = Object.values(data['empShort']).map((data) => data.value);
+                var SelectL = Object.values(data['empSelect']).map((data) => data.value);
+    
+                var ctx = document.getElementById("chart-location").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: months,
+                        datasets: [{
+                            label: 'Short listed',
+                            data: ShortL,
+                            borderColor: [
+                                'rgba(0,0,255,1)',
+                            ],
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Hired',
+                            data: SelectL,
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Employee Hiering statistics: TEKSystems'
+                        }
+                    }
+                });
+    
+            }
+        });
+
     });
 
-}
 
+// var chartDemo = () => {
+//     $.ajax({
 
+//         url: 'http://localhost:3000/home',
+//         type: 'GET',
+        
+//         success: (data) => {
+//             //ChartData = data;
+//             //console.log(data);
+           
+//             var template = Handlebars.compile($('#tabular-template').html());
+//             $("#table-location").html(template(data));
 
+//             var months = Object.values(data['categories']).map((data) => data.label);
+//             var ShortL = Object.values(data['empShort']).map((data) => data.value);
+//             var SelectL = Object.values(data['empSelect']).map((data) => data.value);
 
-// function chartDemo() {
-
-//     var ctx = document.getElementById("chart-location").getContext('2d');
-//     var myChart = new Chart(ctx, {
-//         type: 'line',
-//         data: {
-//             labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-//             datasets: [{
-//                 label: '# of Votes',
-//                 data: [12, 19, 3, 5, 2, 3],
-//                 backgroundColor: [
-//                     'rgba(255, 99, 132, 0.2)',
-//                     'rgba(54, 162, 235, 0.2)',
-//                     'rgba(255, 206, 86, 0.2)',
-//                     'rgba(75, 192, 192, 0.2)',
-//                     'rgba(153, 102, 255, 0.2)',
-//                     'rgba(255, 159, 64, 0.2)'
-//                 ],
-//                 borderColor: [
-//                     'rgba(255,99,132,1)',
-//                     'rgba(54, 162, 235, 1)',
-//                     'rgba(255, 206, 86, 1)',
-//                     'rgba(75, 192, 192, 1)',
-//                     'rgba(153, 102, 255, 1)',
-//                     'rgba(255, 159, 64, 1)'
-//                 ],
-//                 borderWidth: 1
-//             }]
-//         },
-//         options: {
-//             scales: {
-//                 yAxes: [{
-//                     ticks: {
-//                         beginAtZero: true
+//             var ctx = document.getElementById("chart-location").getContext('2d');
+//             var myChart = new Chart(ctx, {
+//                 type: 'line',
+//                 data: {
+//                     labels: months,
+//                     datasets: [{
+//                         label: 'Short listed',
+//                         data: ShortL,
+//                         borderColor: [
+//                             'rgba(0,0,255,1)',
+//                         ],
+//                         borderWidth: 1
+//                     },
+//                     {
+//                         label: 'Hired',
+//                         data: SelectL,
+//                         borderColor: [
+//                             'rgba(255,99,132,1)',
+//                         ],
+//                         borderWidth: 1
+//                     }]
+//                 },
+//                 options: {
+//                     title: {
+//                         display: true,
+//                         text: 'Employee Hiering statistics: TEKSystems'
 //                     }
-//                 }]
-//             }
+//                 }
+//             });
+
 //         }
 //     });
 
 // }
-
-
-

@@ -1,2 +1,2 @@
 # StatMaster
-Expressjs Handlebars AJAX MongoDB Angularjs
+Expressjs Handlebars MongoDB Angularjs

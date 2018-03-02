@@ -9,7 +9,8 @@
   "dependencies": {
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
-    "mongodb": "^2.0.42"
+    "mongodb": "^2.0.42",
+    "simple-ajax": "*"
   },
   "dev_dependencies": {
     "nodemon": "*"
