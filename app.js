@@ -67,6 +67,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main', layourDir: __dirname + '
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
+app.use(express.static('views/images'));
 app.use('/public', express.static('public'));
 app.get('/home', (req, res) => {
 	getData(res);
