@@ -4,7 +4,10 @@ const path = require('path');
 
 const bodyParser = require('body-parser');
 
-const MongoClient = require('mongodb').MongoClient;
+//const MongoClient = require('mongodb').MongoClient;
+
+const MongoClient = require('mongodb').MongoClient
+let dbInstance;
 
 const port = process.env.PORT || 3000;
 
@@ -43,9 +46,9 @@ app.post('/name', (req, res) => {
 	});
 });
 
-MongoClient.connect('mongodb://_karthik:l1o2a3d48991@ds247407.mlab.com:47407/statmaster_test_name', (err, database) => {
+MongoClient.connect('mongodb://statmaster:statmaster@ds151908.mlab.com:51908/statmaster', (err, database) => {
 	if (err) return console.log(err);
-	db = database;
+	dbInstance = client.db('statmaster') // whatever your database name is
 	app.listen(3000, () => {
 		console.log('running at 3000');
 	});
@@ -62,6 +65,37 @@ app.get('/', (req, res) => {
 		res.render('index.html', {name: result});
 	});
 });
+
+app.post('/students_temp', (req, res) => {
+  dbInstance.collection('students_temp').save(req.body, (err, result) => {
+    if (err) return console.log(err)
+
+    console.log('saved to database')
+    res.redirect('/')
+  })
+})
+
+app.get('/students_temp', (req, res) => {
+  dbInstance.collection('students_temp').find().toArray(function (err, results) {
+    results[0].age = "20";
+    res.send(results);
+  });
+})
+
+app.delete('/students_temp', (req, res) => {
+  
+  dbInstance.collection('students_temp').deleteOne({name: "Rajesh"}, 1, (err, result) => {
+    console.log('removed from db')
+    res.redirect('/')
+  })
+})
+
+app.put('/students_temp', (req, res) => {
+   dbInstance.collection('students_temp').update({id: "100"},{$set : {name : "raju123", class : "10000"}},(err, result) => {
+    console.log('updated from db')
+    res.redirect('/')
+  });
+})
 
 //res.render(view, locals);
 

@@ -1,0 +1,18 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body ng-app="">
+
+    <form action="/quotes" method="get">
+  <input type="checkbox" ng-model="enableDisabelButton">
+  <input type="text" ng-model="typeText">
+  <diV ng-bind="typeText">Type Text :</diV>
+  <button ng-show="enableDisabelButton">show </button>
+  <button type="submit">Submit</button>
+  <p>{{ clickCounter }}</p>
+  <button ng-click="clickCounter = clickCounter + 1">count</button>
+</form>
+    </body>
+
+</html>
