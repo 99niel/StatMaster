@@ -23,7 +23,7 @@ var onElementReady = ($canvasElement) => {
             
             success: (data) => {
                 
-                //ChartData = data;
+
                 //console.log(data);
                
                 var template = Handlebars.compile($('#tabular-template').html());
