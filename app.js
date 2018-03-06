@@ -26,33 +26,34 @@ const getData = responseObj => {
 		const monthArray = [];
 		const shortListedArray = [];
 		const selectedArray = [];
+		const aoArray = [];
+		const adArray = [];
+		const otherArray = [];
 
 		for(index in docs){
 			const doc = docs[index];
 			const month = doc['month'];
 			const shortlisted = doc['shortlisted'];
 			const selected = doc['selected'];
+			const appout = doc['appout'];
+			const appdev = doc['appdev'];
+			const other = doc['other'];
 
 			monthArray.push({'label': month});
 			shortListedArray.push({'value': shortlisted});
 			selectedArray.push({'value': selected});
+			aoArray.push({'value': appout});
+			adArray.push({'value': appdev});
+			otherArray.push({'value':other});
 		}
-		
-		/*const dataset = [
-			{
-			  "label" : "# Short listed",
-			  "data" : shortListedArray
-			},
-			{
-			  "label" : "# Hired",
-			  "data": selectedArray
-			}
-		  ];*/
 
 		const response = {
 			'categories': monthArray,
 			'empShort': shortListedArray,
-			'empSelect': selectedArray
+			'empSelect': selectedArray,
+			'empAO': aoArray,
+			'empAD': adArray,
+			'empOth': otherArray
 		};
 		responseObj.json(response);
 	});

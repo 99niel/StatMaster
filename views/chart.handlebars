@@ -1,13 +1,31 @@
 <img class="rounded float-right" src="logo-t.png" height="90px" width="220px">
+<br/><br/><br/><br/>
 
-<canvas id="chart-location" width="80px" height="30px"></canvas>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div><canvas id="chart-location"></canvas></div>
+    </div>
+    <div class="col">
+      <div><canvas id="chart-location2"></canvas></div>
+    </div>
+  </div>
+</div>
+
 <br/>
-<div id="table-location">
-
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div id="table-location"></div>
+    </div>
+    <div class="col">
+      <div id="table-location2"></div>
+    </div>
+  </div>
 </div>
 
 <script id="tabular-template" type="text/html">
-<h3>Tabular Data</h3>
+<h5>Tabular data for employees hired into TEKSystems</h5>
 <table class="table table-sm">
   <thead class="table-primary">
     <tr>
@@ -26,7 +44,30 @@
     </tr>
   </tbody>
 </table>
+</script>
 
-
-
+<script id="tabular-template2" type="text/html">
+<h5>Tabular data for employees hired into AO and AD</h5>
+<table class="table table-sm">
+  <thead class="table-primary">
+    <tr>
+      <td>Month</td>
+      \{{#each categories}} <td>\{{label}}</td> \{{/each }}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A O</td>
+      \{{#each empAO}} <td>\{{value}}</td> \{{/each }}
+    </tr>
+    <tr>
+      <td>A D</td>
+      \{{#each empAD}} <td>\{{value}}</td> \{{/each }}
+    </tr>
+    <tr>
+      <td>Others</td>
+      \{{#each empOth}} <td>\{{value}}</td> \{{/each }}
+    </tr>
+  </tbody>
+</table>
 </script>
