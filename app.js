@@ -46,28 +46,36 @@ app.post('/name', (req, res) => {
 	});
 });
 
-MongoClient.connect('mongodb://statmaster:statmaster@ds151908.mlab.com:51908/statmaster', (err, database) => {
-	if (err) return console.log(err);
+MongoClient.connect('mongodb://statmaster:statmaster@ds151908.mlab.com:51908/statmaster', (err, client) => {
+	if (err) return console.log(err)
 	dbInstance = client.db('statmaster') // whatever your database name is
 	app.listen(3000, () => {
 		console.log('running at 3000');
-	});
-});
+	})
+})
+
+//MongoClient.connect('mongodb://test:test@ds117178.mlab.com:17178/school_db', (err, client) => {
+  //if (err) return console.log(err)
+  //dbInstance = client.db('school_db') // whatever your database name is
+  //app.listen(3000, () => {
+    //console.log('listening on 3000')
+  //})
+//})
 
 //Templating
 
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-	db.collection('name').find().toArray((err, results) => {
-		if (err) return console.log(err);
+app.get('/monthsy', (req, res) => {
+  dbInstance.collection('monthsy').find().toArray(function (err, results) {
+    //results[0];
+    res.send(results[0]);
+    console.log("working")
+  });
+})
 
-		res.render('index.html', {name: result});
-	});
-});
-
-app.post('/students_temp', (req, res) => {
-  dbInstance.collection('students_temp').save(req.body, (err, result) => {
+app.post('/statmaster', (req, res) => {
+  dbInstance.collection('statmaster').save(req.body, (err, result) => {
     if (err) return console.log(err)
 
     console.log('saved to database')
@@ -75,23 +83,16 @@ app.post('/students_temp', (req, res) => {
   })
 })
 
-app.get('/students_temp', (req, res) => {
-  dbInstance.collection('students_temp').find().toArray(function (err, results) {
-    results[0].age = "20";
-    res.send(results);
-  });
-})
-
-app.delete('/students_temp', (req, res) => {
+app.delete('/statmaster', (req, res) => {
   
-  dbInstance.collection('students_temp').deleteOne({name: "Rajesh"}, 1, (err, result) => {
+  dbInstance.collection('statmaster').deleteOne({name: "Rajesh"}, 1, (err, result) => {
     console.log('removed from db')
     res.redirect('/')
   })
 })
 
-app.put('/students_temp', (req, res) => {
-   dbInstance.collection('students_temp').update({id: "100"},{$set : {name : "raju123", class : "10000"}},(err, result) => {
+app.put('/statmaster', (req, res) => {
+   dbInstance.collection('statmaster').update({id: "100"},{$set : {name : "raju123", class : "10000"}},(err, result) => {
     console.log('updated from db')
     res.redirect('/')
   });

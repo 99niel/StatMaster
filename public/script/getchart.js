@@ -1,17 +1,36 @@
+
+ var ourRequest = new XMLHttpRequest();
+    ourRequest.open('GET', 'http://localhost:3000/monthsy')
+    ourRequest.onload = function () {
+        var ourdata = JSON.parse(ourRequest.responseText)
+        //console.log(ourdata.Jan)
+        renderHTML(ourdata);
+       
+
+    };
+    ourRequest.send();
+   
+
+    function renderHTML(data){
+        
+        var test = [data.Jan, data.Feb, data.Mar, data.Apr, data.May, data.Jun, data.Jul, data.Aug, data.Sep, data.Oct, data.Nov, data.Dec]; 
+        console.log(test)
 const Chart1 = document.getElementById('firstChart').getContext('2d');
+
 const firstChart = new Chart(Chart1, {
+
     type: 'line',
     data: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets: [{
             label: '# Hired',
-            data: [20, 15, 4, 25, 4, 20, 9, 9, 10, 9, 13, 10],
+            data: test,
             backgroundColor: 'rgba(91, 185, 211,0.4)',
             borderWidth: 1
         },
         {
         	label: '# Short listed',
-        	data: [23, 20, 7, 30, 6, 25, 9, 10, 14, 10, 19, 20],
+        	data: [50, 20, 7, 30, 6, 25, 9, 10, 14, 10, 19, 20],
         	backgroundColor: 'rgba(0, 0, 0,0.4)',
         	borderWidth: 1
         }]
@@ -23,7 +42,7 @@ const firstChart = new Chart(Chart1, {
         }
     }
 });
-
+}
 const Chart2 = document.getElementById('secondChart').getContext('2d');
 const secondChart = new Chart(Chart2, {
     type: 'bar',

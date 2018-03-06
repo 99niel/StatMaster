@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 
-redirect = require("express-redirect");
-redirect(app);
-app.redirect("index1.html");
+//redirect = require("express-redirect");
+//redirect(app);
+//app.redirect("index1.html");
 
 var bodyParser = require('body-parser');
 app.use(bodyParser());
